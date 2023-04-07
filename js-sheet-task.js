@@ -330,31 +330,176 @@
 
 
 // make simple students markesheet with using condition statement
-var students = [['David', 80], ['Vinoth', 77], ['Divya', 88], ['Ishitha', 95], ['Thomas', 68]];
-var Avgmarks = 0;
-var sum = students.reduce(function (x, y) {
-    return x + y;
-}, 0);
-console.log("Sum using Reduce method: " + sum); // 44
-for (var i = 0; i < students.length; i++) {
-    Avgmarks += students[i][1];
-    var avg = (Avgmarks / students.length);
-}
-console.log("Average grade: " + (Avgmarks) / students.length);
-if (avg < 60) {
-    console.log("Grade : F");
-}
-else if (avg < 70) {
-    console.log("Grade : D");
-}
-else if (avg < 80) {
-    console.log("Grade : C");
-} else if (avg < 90) {
-    console.log("Grade : B");
-} else if (avg < 100) {
-    console.log("Grade : A");
-}
+// var students = [['David', 80], ['Vinoth', 77], ['Divya', 88], ['Ishitha', 95], ['Thomas', 68]];
+// var Avgmarks = 0;
+// // console.log(students[1].sort());
+// for (var i = 0; i < students.length; i++) {
+//     Avgmarks += students[i][1];
+//     var avg = (Avgmarks / students.length);
+// }
+// console.log(students.length);
+// console.log("sum is : " + Avgmarks);
+// console.log("Average grade: " + (Avgmarks) / students.length);
+// if (avg < 60) {
+//     console.log("Grade : F");
+// }
+// else if (avg < 70) {
+//     console.log("Grade : D");
+// }
+// else if (avg < 80) {
+//     console.log("Grade : C");
+// } else if (avg < 90) {
+//     console.log("Grade : B");
+// } else if (avg < 100) {
+//     console.log("Grade : A");
+// }
 
 
 // Check string first character is in uppercase or not
-let itemList = ["pen", "pc", "mouse"];
+// function startsWithCapital(word) {
+//     return word.charAt(0) === word.charAt(0).toUpperCase()
+// }
+// console.log(startsWithCapital("Hello")) // true
+// console.log(startsWithCapital("hello")) // false
+
+
+// Check value is in string or number
+// var numberOfpushUpsToday = "hello";
+// if (!isNaN(numberOfpushUpsToday)) {
+//     console.log('It is a number')
+// }
+// else {
+//     console.log('It is not a number')
+// }
+
+
+// check valid email id
+// function validateEmail(email_id) {
+//     const regex_pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     if (regex_pattern.test(email_id)) {
+//         console.log('The email address is valid');
+//     }
+//     else {
+//         console.log('The email address is not valid');
+//     }
+// }
+// validateEmail('abc123@gmail.com');
+// validateEmail('hello@com');
+
+
+// Convert datetime format of given datetime
+//a simple date formatting function
+function dateFormat(inputDate, format) {
+    //parse the input date
+    const date = new Date(inputDate);
+    //extract the parts of the date
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    //replace the month
+    format = format.replace("MM", month.toString().padStart(2, "0"));
+    //replace the year
+    if (format.indexOf("yyyy") > -1) {
+        format = format.replace("yyyy", year.toString());
+    } else if (format.indexOf("yy") > -1) {
+        format = format.replace("yy", year.toString().substr(2, 2));
+    }
+    // replace the day
+    format = format.replace("dd", day.toString().padStart(2, "0"));
+    return format;
+}
+console.log('Converted date: ' + dateFormat('2021-12-10', 'MM-dd-yyyy'));
+const fileData = {
+    author: "Maria",
+    title: "Date.prototype.toJSON()",
+    createdAt: new Date(2019, 3, 15),
+    updatedAt: new Date(2020, 6, 26),
+};
+const response = JSON.stringify(fileData);
+// Imagine transmission through network
+const data = JSON.parse(response, (key, value) => {
+    if (key === "createdAt" || key === "updatedAt") {
+        return Date.parse(value);
+    }
+    return value;
+});
+
+console.log(data);
+
+
+// find out month name, weekday name of given datetime
+// const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// const d = new Date();
+// let day = weekday[d.getDay()];
+// console.log(day);
+// var month_name = function (dt) {
+//     mlist = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//     return mlist[dt.getMonth()];
+// };
+// console.log(month_name(new Date("12/04/2009")));
+// console.log(month_name(new Date("04/04/2014")));
+
+
+// Find out previous and next month of given date
+// const yesterday = new Date(30 - 04 - 10);
+// yesterday.setDate(yesterday.getDate() - 1);
+// console.log(yesterday); //
+// function padTo2Digits(num) {
+//     return num.toString().padStart(2, '0');
+// }
+// function formatDate(date) {
+//     return [
+//         date.getFullYear(),
+//         padTo2Digits(date.getMonth() + 1),
+//         padTo2Digits(date.getDate()),
+//     ].join('-');
+// }
+// console.log(formatDate(yesterday)); // 👉️ "2022-01-13"
+// const today = new Date();
+// const yesterday = new Date();
+// yesterday.setDate(today.getDate() - 1);
+// console.log(yesterday);
+
+
+// find out previous and next month of given date
+// const dateWithoutTime = someDate => new Date(someDate.toDateString());
+// const checkDateIsTodayOrYesterday = someDate => {
+//     const today = dateWithoutTime(new Date());
+//     const yesterday = dateWithoutTime(new Date());
+
+//     yesterday.setDate(today.getDate() - 1);
+
+//     const comparisonDateTime = dateWithoutTime(someDate).getTime();
+
+//     if (
+//         comparisonDateTime > today.getTime() ||
+//         comparisonDateTime < yesterday.getTime()
+//     ) {
+//         throw new Error("Invalid date - neither today or yesterday");
+//     }
+
+//     return comparisonDateTime === today.getTime() ? "today" : "yesterday";
+// };
+// const yesterdaysDate = new Date();
+// yesterdaysDate.setDate(yesterdaysDate.getDate() - 1);
+// console.log(checkDateIsTodayOrYesterday(new Date())); // 'today'
+// console.log(checkDateIsTodayOrYesterday(yesterdaysDate)); // 'yesterday'
+// console.log(checkDateIsTodayOrYesterday(new Date("01/02/2020"))); // Error "Invalid date - neither today or yesterday"
+
+
+// find out first and last date of month of given date
+// function getFirstDayOfMonth(year, month) {
+//     return new Date(year, month, 1);
+// }
+// console.log(getFirstDayOfMonth(2026, 0));
+// console.log(getFirstDayOfMonth(2031, 0));
+// console.log(getFirstDayOfMonth(2036, 0));
+// function getLastDayOfMonth(year, month) {
+//     return new Date(year, month + 1, 0);
+// }
+// console.log(getLastDayOfMonth(2000, 0));
+// console.log(getLastDayOfMonth(2028, 1));
+// console.log(getLastDayOfMonth(2029, 2));
+// console.log(getLastDayOfMonth(2004), 0);
+
+// find out first and last date of previous and next months of given date
