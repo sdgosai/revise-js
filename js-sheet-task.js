@@ -389,42 +389,50 @@
 
 // Convert datetime format of given datetime
 //a simple date formatting function
-function dateFormat(inputDate, format) {
-    //parse the input date
-    const date = new Date(inputDate);
-    //extract the parts of the date
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    //replace the month
-    format = format.replace("MM", month.toString().padStart(2, "0"));
-    //replace the year
-    if (format.indexOf("yyyy") > -1) {
-        format = format.replace("yyyy", year.toString());
-    } else if (format.indexOf("yy") > -1) {
-        format = format.replace("yy", year.toString().substr(2, 2));
-    }
-    // replace the day
-    format = format.replace("dd", day.toString().padStart(2, "0"));
-    return format;
-}
-console.log('Converted date: ' + dateFormat('2021-12-10', 'MM-dd-yyyy'));
-const fileData = {
-    author: "Maria",
-    title: "Date.prototype.toJSON()",
-    createdAt: new Date(2019, 3, 15),
-    updatedAt: new Date(2020, 6, 26),
-};
-const response = JSON.stringify(fileData);
-// Imagine transmission through network
-const data = JSON.parse(response, (key, value) => {
-    if (key === "createdAt" || key === "updatedAt") {
-        return Date.parse(value);
-    }
-    return value;
-});
+// function dateFormat(inputDate, format) {
+//     //parse the input date
+//     const date = new Date(inputDate);
+//     //extract the parts of the date
+//     const day = date.getDate();
+//     const month = date.getMonth() + 1;
+//     const year = date.getFullYear();
+//     //replace the month
+//     format = format.replace("MM", month.toString().padStart(2, "0"));
+//     //replace the year
+//     if (format.indexOf("yyyy") > -1) {
+//         format = format.replace("yyyy", year.toString());
+//     } else if (format.indexOf("yy") > -1) {
+//         format = format.replace("yy", year.toString().substr(2, 2));
+//     }
+//     // replace the day
+//     format = format.replace("dd", day.toString().padStart(2, "0"));
+//     return format;
+// }
+// console.log('Converted date: ' + dateFormat('2021-12-10', 'MM-dd-yyyy'));
+// const fileData = {
+//     author: "Maria",
+//     title: "Date.prototype.toJSON()",
+//     createdAt: new Date(2019, 3, 15),
+//     updatedAt: new Date(2020, 6, 26),
+// };
+// const response = JSON.stringify(fileData);
+// // Imagine transmission through network
+// const data = JSON.parse(response, (key, value) => {
+//     if (key === "createdAt" || key === "updatedAt") {
+//         return Date.parse(value);
+//     }
+//     return value;
+// });
+// console.log(data);
 
-console.log(data);
+// var dt = new Date();
+// var month = dt.getMonth(); // read the current month
+// var year = dt.getFullYear(); // read the current year
+
+// dt = new Date(year, month, 01); // date object with first day of current month
+
+// var first_day = dt.getDay(); //, first day of present month ( from 0 to 6 )
+// console.log("first_day = " + first_day + " current date");
 
 
 // find out month name, weekday name of given datetime
@@ -441,21 +449,21 @@ console.log(data);
 
 
 // Find out previous and next month of given date
-// const yesterday = new Date(30 - 04 - 10);
-// yesterday.setDate(yesterday.getDate() - 1);
-// console.log(yesterday); //
-// function padTo2Digits(num) {
-//     return num.toString().padStart(2, '0');
-// }
-// function formatDate(date) {
-//     return [
-//         date.getFullYear(),
-//         padTo2Digits(date.getMonth() + 1),
-//         padTo2Digits(date.getDate()),
-//     ].join('-');
-// }
-// console.log(formatDate(yesterday)); // 👉️ "2022-01-13"
-// const today = new Date();
+const yesterday = new Date(30 - 04 - 10);
+yesterday.setDate(yesterday.getDate() - 1);
+console.log(yesterday);
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
+function formatDate(date) {
+    return [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+    ].join('-');
+}
+console.log(formatDate(yesterday)); // 👉️ "2022-01-13"
+const today = new Date();
 // const yesterday = new Date();
 // yesterday.setDate(today.getDate() - 1);
 // console.log(yesterday);
